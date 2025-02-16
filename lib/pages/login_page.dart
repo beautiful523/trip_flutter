@@ -3,6 +3,7 @@ import 'package:trip_flutter/util/string_util.dart';
 import 'package:trip_flutter/util/view_util.dart';
 import 'package:trip_flutter/widget/input_widget.dart';
 import 'package:trip_flutter/widget/login_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -91,4 +92,9 @@ class _LoginPageState extends State<LoginPage> {
   _login() {}
 }
 
-_jumpRegistration() {}
+_jumpRegistration() async {
+  Uri uri = Uri.parse("https://api.devio.org/uapi/swagger-ui.html#/Account/registrationUsingPOST");
+  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    throw "Could not launch";
+  }
+}
